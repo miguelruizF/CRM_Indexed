@@ -43,6 +43,7 @@
             empresa
         }
         cliente.id = Date.now();
+        console.log(cliente);
 
         //Funcion para crear nuevo cliente
         crearNuevoCliente(cliente);
