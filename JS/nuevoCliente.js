@@ -51,7 +51,7 @@
     //Funcion para crear cliente
     function crearNuevoCliente(cliente) {
         //Crear transaccion para escribir en la base de datos
-        const transaction = DB.transaction("crm", "readwrite");
+        const transaction = DB.transaction(["crm"], "readwrite");
         const objectStore = transaction.objectStore("crm");
         //ObjectStore realizara todas las operaciones
         objectStore.add(cliente);
