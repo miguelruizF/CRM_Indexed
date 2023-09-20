@@ -58,13 +58,18 @@
         objectStore.add(cliente);
         //Si existe un error al agregar un cliente
         transaction.onerror = function() {
-            console.error("Hubo un error");
+            imprimirAlerta("Hubo un error", "error");
             // imprimirAlerta("Hubo un error", "error");
         }
         //Si el cliente se agrega correctamente
         transaction.oncomplete = function() {
             // console.log("Cliente agregado correctamente")
             imprimirAlerta("El cliente se agrego correctamente");
+
+            //Cambiar de ventana
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 3000);
         }
     }
 
