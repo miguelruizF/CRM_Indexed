@@ -53,12 +53,13 @@
                 const cursor = e.target.result;
 
                 if(cursor){
+                    console.log(cursor.value)
                     const {nombre, empresa, email, telefono, id} = cursor.value;
                     //Seleccionar el tbody
                     const listado_cliente = document.querySelector("#listado_cliente");
 
                     //Insertar en el HTML
-                    listado_cliente.innerHTML = ` <tr>
+                    listado_cliente.innerHTML += ` <tr>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                         <p class="text-sm leading-5 font-medium text-gray-700 text-lg  font-bold"> ${nombre} </p>
                         <p class="text-sm leading-10 text-gray-700"> ${email} </p>
