@@ -1,5 +1,7 @@
 (function(){
     let DB;
+     //Seleccionar el tbody
+    const listado_cliente = document.querySelector("#listado_cliente");
 
     document.addEventListener("DOMContentLoaded", () => {
         crearDB();
@@ -7,6 +9,8 @@
         if (window.indexedDB.open("crm", 1)) {
             obtenerClientes();
         }
+
+        listado_cliente.addEventListener("click", eliminarRegistro);
     });
 
     //Crear Base de datos
@@ -55,8 +59,6 @@
                 if(cursor){
                     console.log(cursor.value)
                     const {nombre, empresa, email, telefono, id} = cursor.value;
-                    //Seleccionar el tbody
-                    const listado_cliente = document.querySelector("#listado_cliente");
 
                     //Insertar en el HTML
                     listado_cliente.innerHTML += ` <tr>
@@ -72,7 +74,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
                         <a href="editar-cliente.html?id=${id}" class="text-teal-600 hover:text-teal-900 mr-5">Editar</a>
-                        <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900">Eliminar</a>
+                        <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900 eliminar">Eliminar</a>
                     </td>
                 </tr>
             `;
@@ -80,6 +82,28 @@
                     cursor.continue();
                 }else{
                     console.log("No hay mas registros");
+                }
+            }
+        }
+    }
+
+    function eliminarRegistro(e) {
+        if(e.target.classList.contains("eliminar")){
+            const idEliminar = Number(e.target.dataset.cliente);
+            // console.log(idEliminar);
+            const confirmar = confirm("¿Deseas eliminar este registro?");
+            if(confirmar){
+                const transaction = DB.transaction(["crm"], "readwrite");
+                const objectStore = transaction.objectStore("crm");
+                //Eliminar registro
+                objectStore.delete(idEliminar);
+                transaction.oncomplete = function(){
+                    console.log("Registro eliminado");
+                    e.target.parentElement.parentElement.remove();
+                }
+
+                transaction.onerror = function() {
+                    console.log("Hubo un error");
                 }
             }
         }
