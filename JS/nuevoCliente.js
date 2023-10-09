@@ -1,11 +1,17 @@
 (function(){
     let DB;
     const formulario = document.querySelector("#formulario");
+    const btn_media = document.querySelector("#btn_media");
+    const nav = document.querySelector("#nav");
 
     document.addEventListener("DOMContentLoaded", ()=>{
         conectarDB();
 
         formulario.addEventListener("submit", validarCliente);
+
+        btn_media.addEventListener("click", ()=>{
+            nav.classList.toggle("hidden");
+        });
     });
 
     function conectarDB() {

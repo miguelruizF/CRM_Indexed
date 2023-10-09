@@ -2,6 +2,8 @@
     let DB;
      //Seleccionar el tbody
     const listado_cliente = document.querySelector("#listado_cliente");
+    const btn_media = document.querySelector("#btn_media");
+    const nav = document.querySelector("#nav");
 
     document.addEventListener("DOMContentLoaded", () => {
         crearDB();
@@ -11,6 +13,10 @@
         }
 
         listado_cliente.addEventListener("click", eliminarRegistro);
+
+        btn_media.addEventListener("click", ()=>{
+            nav.classList.toggle("hidden");
+        });
     });
 
     //Crear Base de datos
@@ -108,4 +114,5 @@
             }
         }
     }
+
 })();
